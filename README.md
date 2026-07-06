@@ -5,7 +5,7 @@ straddles when a stock's implied (or implied-proxy) volatility trades well
 above its realized historical volatility, across a basket of liquid S&P 500
 names over a 5-year window.
 
-Extends [OptionsPricingEngine](https://github.com/ryaneefeng/options-pricing-engine)
+Extends [OptionsPricingEngine](https://github.com/ryanneefeng/OptionsPricingEngine)
 (Black-Scholes pricing, Greeks, Newton-Raphson implied vol solver) by adding
 a data pipeline, signal generation, trade simulation, and performance
 analysis on top of the existing pricing core.
