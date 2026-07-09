@@ -1,14 +1,4 @@
-"""
-Trade simulation for the volatility risk premium backtester.
-
-On each signal day, simulates selling an at-the-money straddle (short call
-+ short put at the same strike), priced with the existing Black-Scholes
-engine using the EWMA vol proxy as the entry sigma. Holds 30 trading days,
-then marks PnL against where the stock actually closed. This is Step 3 of 5.
-"""
-
 import pandas as pd
-
 from pricing import Option
 
 HOLD_DAYS = 30
@@ -17,15 +7,6 @@ COST_PER_LEG = 0.05  # per the spec: $0.05 per contract
 
 
 def simulate_trades(closes, signals, hold_days=HOLD_DAYS, r=RISK_FREE_RATE, cost_per_leg=COST_PER_LEG):
-    """
-    Walk each ticker's signal days in order and simulate a straddle trade
-    whenever a signal fires and no position is already open on that name.
-
-    closes  : wide DataFrame, index = date, columns = ticker (from data_pipeline)
-    signals : dict of ticker -> DataFrame with hv/ewma_vol/spread/signal (from signals.py)
-
-    Returns a DataFrame, one row per completed trade.
-    """
     trades = []
 
     for ticker, sdf in signals.items():

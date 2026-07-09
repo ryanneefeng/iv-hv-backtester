@@ -1,11 +1,3 @@
-"""
-Data pipeline for the volatility risk premium backtester.
-
-Extends the existing options pricing engine (python/pricing.py) by pulling
-multi-year price history for a basket of liquid S&P 500 names and computing
-rolling historical volatility for each name. This is Step 1 of 5.
-"""
-
 import math
 import numpy as np
 import pandas as pd
@@ -31,11 +23,6 @@ HV_WINDOW = 30  # trading days
 
 
 def fetch_price_history(tickers=None, period="5y"):
-    """
-    Download daily close prices for a basket of tickers.
-
-    Returns a wide DataFrame: index = date, columns = ticker, values = close.
-    """
     tickers = tickers or TICKERS
     raw = yf.download(tickers, period=period, auto_adjust=True, progress=False)
 
@@ -53,13 +40,6 @@ def fetch_price_history(tickers=None, period="5y"):
 
 
 def compute_rolling_hv(closes, window=HV_WINDOW):
-    """
-    Rolling annualized historical volatility from daily log returns.
-
-    closes : wide DataFrame, index = date, columns = ticker
-    Returns a DataFrame of the same shape. The first `window` rows are NaN
-    since there isn't enough history yet to compute a rolling std.
-    """
     log_returns = np.log(closes / closes.shift(1))
     rolling_std = log_returns.rolling(window=window).std()
     annualized_hv = rolling_std * math.sqrt(TRADING_DAYS_PER_YEAR)
