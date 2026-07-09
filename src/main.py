@@ -3,10 +3,12 @@ import os
 from data_pipeline import fetch_price_history
 from metrics import aggregate_metrics
 from iv_strategies import run_short_straddle, run_long_strangle, run_calendar_spread
+from put_strategies import run_long_put, run_cash_secured_short_put, run_bear_put_spread
 from plotting import plot_equity_curve
 
 CATEGORIES = {
-    "1": ("Put strategies", ["Long Put", "Cash-Secured Short Put", "Bear Put Spread"], None),
+    "1": ("Put strategies", ["Long Put", "Cash-Secured Short Put", "Bear Put Spread"],
+          [run_long_put, run_cash_secured_short_put, run_bear_put_spread]),
     "2": ("Call strategies", ["Long Call", "Covered Call", "Bull Call Spread"], None),
     "3": ("Combined strategies", ["Long Straddle", "Iron Condor", "Collar"], None),
     "4": ("Implied Volatility strategies",
