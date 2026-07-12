@@ -1,12 +1,12 @@
 import os
 
-from data_pipeline import fetch_price_history
-from metrics import aggregate_metrics
-from iv_strategies import run_short_straddle, run_long_strangle, run_calendar_spread
-from put_strategies import run_long_put, run_cash_secured_short_put, run_bear_put_spread
-from call_strategies import run_long_call, run_covered_call, run_bull_call_spread
-from combined_strategies import run_long_straddle, run_iron_condor, run_collar
-from plotting import plot_equity_curve
+from core.data_pipeline import fetch_price_history
+from core.metrics import aggregate_metrics
+from strategies.iv_strategies import run_short_straddle, run_long_strangle, run_calendar_spread
+from strategies.put_strategies import run_long_put, run_cash_secured_short_put, run_bear_put_spread
+from strategies.call_strategies import run_long_call, run_covered_call, run_bull_call_spread
+from strategies.combined_strategies import run_long_straddle, run_iron_condor, run_collar
+from core.plotting import plot_equity_curve
 
 CATEGORIES = {
     "1": ("Put strategies", ["Long Put", "Cash-Secured Short Put", "Bear Put Spread"],
@@ -19,6 +19,8 @@ CATEGORIES = {
           ["Short Straddle on Vol Spike", "Long Strangle on Vol Compression", "Calendar Spread"],
           [run_short_straddle, run_long_strangle, run_calendar_spread]),
 }
+
+CATEGORY_FOLDERS = {"1": "put", "2": "call", "3": "combined", "4": "iv"}
 
 RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results")
 
@@ -82,11 +84,13 @@ def main():
     print(f"  Max drawdown: {m['max_drawdown']}")
 
     if m["num_trades"] > 0:
-        os.makedirs(RESULTS_DIR, exist_ok=True)
+        subfolder = CATEGORY_FOLDERS[category]
+        target_dir = os.path.join(RESULTS_DIR, subfolder)
+        os.makedirs(target_dir, exist_ok=True)
         filename = strategy_name.replace(" ", "_") + ".png"
-        save_path = os.path.join(RESULTS_DIR, filename)
+        save_path = os.path.join(target_dir, filename)
         plot_equity_curve(trades, strategy_name, save_path)
-        print(f"\nEquity curve + drawdown saved to: results/{filename}")
+        print(f"\nEquity curve + drawdown saved to: results/{subfolder}/{filename}")
     else:
         print("\nNo trades triggered, nothing to plot.")
 

@@ -2,7 +2,7 @@ import math
 import numpy as np
 import pandas as pd
 
-from data_pipeline import HV_WINDOW, TRADING_DAYS_PER_YEAR, compute_rolling_hv
+from core.data_pipeline import HV_WINDOW, TRADING_DAYS_PER_YEAR, compute_rolling_hv
 
 EWMA_LAMBDA = 0.94  # RiskMetrics standard, ~11-day half-life
 SIGNAL_THRESHOLD = 1.3  # fire when EWMA vol exceeds HV by this multiple
@@ -33,7 +33,7 @@ def generate_signals(closes, hv_window=HV_WINDOW, lam=EWMA_LAMBDA, threshold=SIG
 
 
 if __name__ == "__main__":
-    from data_pipeline import fetch_price_history
+    from core.data_pipeline import fetch_price_history
 
     print("Fetching prices...")
     closes = fetch_price_history()

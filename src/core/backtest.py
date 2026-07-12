@@ -1,5 +1,5 @@
 import pandas as pd
-from pricing import Option
+from core.pricing import Option
 
 HOLD_DAYS = 30
 RISK_FREE_RATE = 0.05
@@ -73,8 +73,8 @@ def simulate_trades(closes, signals, hold_days=HOLD_DAYS, r=RISK_FREE_RATE, cost
 
 
 if __name__ == "__main__":
-    from data_pipeline import fetch_price_history
-    from signals import generate_signals
+    from core.data_pipeline import fetch_price_history
+    from core.signals import generate_signals
 
     print("Fetching prices...")
     closes = fetch_price_history()

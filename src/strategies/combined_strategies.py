@@ -1,9 +1,9 @@
 import pandas as pd
 
-from pricing import Option
-from signals import compute_ewma_vol, generate_signals
-from data_pipeline import compute_rolling_hv
-from put_strategies import compute_trend_signals
+from core.pricing import Option
+from core.signals import compute_ewma_vol, generate_signals
+from core.data_pipeline import compute_rolling_hv
+from strategies.put_strategies import compute_trend_signals
 
 RISK_FREE_RATE = 0.05
 COST_PER_LEG = 0.05

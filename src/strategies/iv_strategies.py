@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
 
-from pricing import Option
-from data_pipeline import compute_rolling_hv
-from signals import compute_ewma_vol, generate_signals
-from backtest import simulate_trades
+from core.pricing import Option
+from core.data_pipeline import compute_rolling_hv
+from core.signals import compute_ewma_vol, generate_signals
+from core.backtest import simulate_trades
 
 RISK_FREE_RATE = 0.05
 COST_PER_LEG = 0.05

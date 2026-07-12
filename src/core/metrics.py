@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 
-from data_pipeline import fetch_price_history
-from signals import generate_signals
-from backtest import simulate_trades
+from core.data_pipeline import fetch_price_history
+from core.signals import generate_signals
+from core.backtest import simulate_trades
 
 THRESHOLD_GRID = [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.8, 2.0]
 
