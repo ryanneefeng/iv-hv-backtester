@@ -30,7 +30,7 @@ metrics, and saves an equity curve + drawdown chart to `results/<category>/`.
 iv-hv-backtester/
 ├── data/
 ├── notebooks/
-│   ├── check_wo
+│   ├── check_long_put.py
 │   ├── check_worst_trade.py
 ├── results/
 │   ├── put/
@@ -52,6 +52,12 @@ iv-hv-backtester/
 │       ├── combined_strategies.py
 │       └── iv_strategies.py
 ├── tests/
+│   ├── conftest.py
+│   ├── test_backtest.py
+│   ├── test_data_pipeline.py
+│   ├── test_metrics.py
+│   ├── test_pricing.py
+│   └── test_signals.py
 ├── requirements.txt
 ├── README.md
 └── ANALYSIS.md
